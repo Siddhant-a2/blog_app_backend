@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT;
 
 var corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'https://monumental-palmier-458ed5.netlify.app/',
     method: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
 }
