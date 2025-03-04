@@ -11,13 +11,19 @@ import cors from 'cors';
 const app = express();
 const port = process.env.PORT;
 
-var corsOptions = {
-    origin: 'https://monumental-palmier-458ed5.netlify.app/',
-    method: "GET, POST, PUT, DELETE, PATCH, HEAD",
-    credentials: true,
-}
+const allowedOrigins = ["https://monumental-palmier-458ed5.netlify.app"];
 
-app.use(cors(corsOptions));
+app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/api/auth',authRouter);
